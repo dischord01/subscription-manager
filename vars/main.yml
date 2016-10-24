@@ -1,0 +1,9 @@
+# file: roles/subscription-manager/vars/main.yml
+---
+#####################################################
+# RHEL Subscription Info:
+#####################################################
+username: ""
+password: ""
+pool_id: ""
+

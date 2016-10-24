@@ -1,0 +1,29 @@
+# file: roles/subscription-manager/tasks/aws_repos.yml
+---
+#---------------------------------------------------
+#  Subscription Manager: AWS
+#---------------------------------------------------
+- name: disable all amz rhel repos
+  command: /usr/bin/yum-config-manager --disable *
+  tags:
+    - rhel
+
+- name: disable amz yum plugin
+  lineinfile: dest=/etc/yum/pluginconf.d/amazon-id.conf regexp='^enabled' line='enabled = 0' state=present
+  tags:
+    - rhel
+
+- name: disable rhui-lb yum plugin
+  lineinfile: dest=/etc/yum/pluginconf.d/rhui-lb.conf regexp='^enabled' line='enabled = 0' state=present
+  tags:
+    - rhel
+
+- name: enable product-id yum plugin
+  lineinfile: dest=/etc/yum/pluginconf.d/product-id.conf regexp='^enabled' line='enabled = 1' state=present
+  tags:
+    - rhel
+
+- name: enable sub manager yum plugin
+  lineinfile: dest=/etc/yum/pluginconf.d/subscription-manager.conf regexp='^enabled' line='enabled = 1' state=present
+  tags:
+    - rhel
